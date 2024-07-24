@@ -1,12 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import App from "./App";
-import * as api from "./services/api.ts";
+import TodoApp from "./TodoApp";
+import { TodoProvider } from "../../context/TodoContext";
+import * as api from "../../services/api";
 
-vi.mock("./services/api");
+vi.mock("../../services/api");
 
-describe("App", () => {
+const renderWithContext = (component: React.ReactNode) => {
+  return render(<TodoProvider>{component}</TodoProvider>);
+};
+
+describe("TodoApp", () => {
   const mockTodos = [
     { id: 1, title: "Test Todo 1", completed: false, dueDate: "2023-07-01" },
     { id: 2, title: "Test Todo 2", completed: true, dueDate: "2023-07-02" },
@@ -17,12 +22,12 @@ describe("App", () => {
   });
 
   it("renders the app title", () => {
-    render(<App />);
+    renderWithContext(<TodoApp />);
     expect(screen.getByText("What's on your mind?")).toBeInTheDocument();
   });
 
   it("fetches and displays todos", async () => {
-    render(<App />);
+    renderWithContext(<TodoApp />);
     await waitFor(() => {
       expect(screen.getByText("Test Todo 1")).toBeInTheDocument();
       expect(screen.getByText("Test Todo 2")).toBeInTheDocument();
@@ -37,7 +42,7 @@ describe("App", () => {
       dueDate: "2023-07-03",
     });
 
-    render(<App />);
+    renderWithContext(<TodoApp />);
 
     const titleInput = screen.getByPlaceholderText("Enter a new task");
     const dateInput = screen.getByTestId("date");
@@ -53,7 +58,7 @@ describe("App", () => {
   });
 
   it("filters todos", async () => {
-    render(<App />);
+    renderWithContext(<TodoApp />);
 
     await waitFor(() => {
       expect(screen.getByText("Test Todo 1")).toBeInTheDocument();
@@ -68,7 +73,7 @@ describe("App", () => {
   });
 
   it("toggles todo completion", async () => {
-    render(<App />);
+    renderWithContext(<TodoApp />);
 
     await waitFor(() => {
       expect(screen.getByText("Test Todo 1")).toBeInTheDocument();
@@ -81,7 +86,7 @@ describe("App", () => {
   });
 
   it("deletes a todo", async () => {
-    render(<App />);
+    renderWithContext(<TodoApp />);
 
     await waitFor(() => {
       expect(screen.getByText("Test Todo 1")).toBeInTheDocument();
