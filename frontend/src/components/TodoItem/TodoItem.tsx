@@ -8,12 +8,7 @@ interface TodoItemProps {
   onEdit: (id: number, title: string, dueDate: string) => void;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({
-  todo,
-  onToggle,
-  onDelete,
-  onEdit,
-}) => {
+const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(todo.title);
   const [editDueDate, setEditDueDate] = useState(todo.dueDate);

@@ -20,9 +20,7 @@ export const TodoContext = createContext<TodoContextType | undefined>(
   undefined
 );
 
-export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   const todoData = useTodos();
 
   return (

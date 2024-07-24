@@ -1,8 +1,7 @@
-import React from "react";
 import TodoFilter from "../TodoFilter/TodoFilter";
 import { useTodoContext } from "../../context/useTodoContext";
 
-const TodoControls: React.FC = () => {
+const TodoControls = () => {
   const { filter, setFilter, sortOrder, sortTodos } = useTodoContext();
 
   return (

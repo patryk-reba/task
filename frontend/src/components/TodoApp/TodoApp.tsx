@@ -1,16 +1,15 @@
-import React from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import TodoForm from "../TodoForm/TodoForm";
 import TodoControls from "../TodoControls/TodoControls";
 import TodoList from "../TodoList";
 import { useTodoContext } from "../../context/useTodoContext";
 
-const TodoApp: React.FC = () => {
+const TodoApp = () => {
   const { error } = useTodoContext();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl min-h-[520px]">
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-1">
             Your Todo List

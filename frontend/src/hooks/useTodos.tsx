@@ -80,7 +80,7 @@ export const useTodos = () => {
   };
 
   const sortTodos = () => {
-    const sortedTodos = [...todos].sort((a, b) => {
+    const sortedTodos = todos.sort((a, b) => {
       if (sortOrder === "asc") {
         return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
       } else {

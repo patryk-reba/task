@@ -5,10 +5,7 @@ interface TodoFilterProps {
   onFilterChange: (filter: FilterType) => void;
 }
 
-const TodoFilter: React.FC<TodoFilterProps> = ({
-  currentFilter,
-  onFilterChange,
-}) => {
+const TodoFilter = ({ currentFilter, onFilterChange }: TodoFilterProps) => {
   const filters: FilterType[] = ["all", "active", "completed"];
 
   return (

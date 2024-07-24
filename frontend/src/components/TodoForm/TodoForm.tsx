@@ -1,16 +1,23 @@
 import { useState } from "react";
 import { useTodoContext } from "../../context/useTodoContext";
 
-const TodoForm: React.FC = () => {
+const TodoForm = () => {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [error, setError] = useState("");
   const { handleAddTodo } = useTodoContext();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleAddTodo(title, dueDate);
+    const trimmedTitle = title.trim();
+    if (trimmedTitle === "") {
+      setError("Task title cannot be empty");
+      return;
+    }
+    handleAddTodo(trimmedTitle, dueDate);
     setTitle("");
     setDueDate("");
+    setError("");
   };
 
   return (
@@ -19,11 +26,15 @@ const TodoForm: React.FC = () => {
         <input
           type="text"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            if (error) setError("");
+          }}
           placeholder="Enter a new task"
           required
           className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
         />
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
       </div>
       <div className="mb-4">
         <input
