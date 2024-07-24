@@ -9,9 +9,11 @@ const TodoFilter: React.FC<TodoFilterProps> = ({
   currentFilter,
   onFilterChange,
 }) => {
+  const filters: FilterType[] = ["all", "active", "completed"];
+
   return (
     <div className="flex justify-center space-x-4 mb-6">
-      {(["all", "active", "completed"] as FilterType[]).map((filter) => (
+      {filters.map((filter) => (
         <button
           key={filter}
           onClick={() => onFilterChange(filter)}

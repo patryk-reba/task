@@ -2,6 +2,7 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import TodoFilter from "./components/TodoFilter/TodoFilter";
 import TodoForm from "./components/TodoForm/TodoForm";
 import TodoItem from "./components/TodoItem/TodoItem";
+import TodoList from "./components/TodoList";
 import { useTodos } from "./hooks/useTodos";
 
 function App() {
@@ -41,23 +42,13 @@ function App() {
               {sortOrder === "asc" ? "Ascending" : "Descending"})
             </button>
           </div>
-          {isLoading ? (
-            <div className="text-center py-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500 mx-auto"></div>
-            </div>
-          ) : (
-            <ul className="divide-y divide-gray-200">
-              {todos.map((todo) => (
-                <TodoItem
-                  key={todo.id}
-                  todo={todo}
-                  onToggle={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                  onEdit={handleEditTodo}
-                />
-              ))}
-            </ul>
-          )}
+          <TodoList
+            isLoading={isLoading}
+            todos={todos}
+            onToggle={handleToggleTodo}
+            onDelete={handleDeleteTodo}
+            onEdit={handleEditTodo}
+          />
         </div>
       </div>
     </div>
