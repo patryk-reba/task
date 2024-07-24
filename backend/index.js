@@ -7,7 +7,6 @@ app.use(cors());
 app.use(express.json());
 
 let todos = [];
-console.log("cc");
 
 app.get("/api/todos", (req, res) => {
   res.json(todos);

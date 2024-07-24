@@ -1,16 +1,14 @@
 import { useState } from "react";
+import { useTodoContext } from "../../context/useTodoContext";
 
-interface TodoFormProps {
-  onAdd: (title: string, dueDate: string) => void;
-}
-
-const TodoForm: React.FC<TodoFormProps> = ({ onAdd }) => {
+const TodoForm: React.FC = () => {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const { handleAddTodo } = useTodoContext();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onAdd(title, dueDate);
+    handleAddTodo(title, dueDate);
     setTitle("");
     setDueDate("");
   };
@@ -30,6 +28,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ onAdd }) => {
       <div className="mb-4">
         <input
           type="date"
+          data-testid="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
           required
