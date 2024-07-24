@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Todo } from "./types.ts";
+import { Todo } from "./types";
 
 const API_BASE_URL = "http://localhost:3001/api";
 
@@ -31,4 +31,16 @@ export const toggleTodo = async (
 
 export const deleteTodo = async (id: number): Promise<void> => {
   await axios.delete(`${API_BASE_URL}/todos/${id}`);
+};
+
+export const editTodo = async (
+  id: number,
+  title: string,
+  dueDate: string
+): Promise<Todo> => {
+  const response = await axios.put<Todo>(`${API_BASE_URL}/todos/${id}`, {
+    title,
+    dueDate,
+  });
+  return response.data;
 };
