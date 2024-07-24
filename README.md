@@ -38,7 +38,6 @@ The project is organized into two main directories:
 - `src/context`: React Context for state management
 - `src/hooks`: Custom React hooks
 - `src/types`: TypeScript type definitions
-- `src/utils`: Utility functions
 - `src/services`: API service functions
 
 ### Backend (`/backend`)
