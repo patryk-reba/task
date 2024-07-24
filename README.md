@@ -57,7 +57,7 @@ The project is organized into two main directories:
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your-username/todo-list-app.git
+   git clone https://github.com/patryk-reba/task.git
    cd todo-list-app
    ```
 
