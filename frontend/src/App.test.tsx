@@ -29,28 +29,43 @@ describe("App", () => {
     });
   });
 
-  //   it("adds a new todo", async () => {
-  //     vi.mocked(api.addTodo).mockResolvedValue({
-  //       id: 3,
-  //       title: "New Todo",
-  //       completed: false,
-  //       dueDate: "2023-07-03",
-  //     });
+  it("adds a new todo", async () => {
+    vi.mocked(api.addTodo).mockResolvedValue({
+      id: 3,
+      title: "New Todo",
+      completed: false,
+      dueDate: "2023-07-03",
+    });
 
-  //     render(<App />);
+    render(<App />);
 
-  //     const titleInput = screen.getByPlaceholderText("Enter a new task");
-  //     const dateInput = screen.getByLabelText("Due date");
-  //     const addButton = screen.getByRole("button", { name: "Add Todo" });
+    const titleInput = screen.getByPlaceholderText("Enter a new task");
+    const dateInput = screen.getByTestId("date");
+    const addButton = screen.getByRole("button", { name: "Add Todo" });
 
-  //     await userEvent.type(titleInput, "New Todo");
-  //     await userEvent.type(dateInput, "2023-07-03");
-  //     await userEvent.click(addButton);
+    await userEvent.type(titleInput, "New Todo");
+    await userEvent.type(dateInput, "2023-07-03");
+    await userEvent.click(addButton);
 
-  //     await waitFor(() => {
-  //       expect(screen.getByText("New Todo")).toBeInTheDocument();
-  //     });
-  //   });
+    await waitFor(() => {
+      expect(screen.getByText("New Todo")).toBeInTheDocument();
+    });
+  });
+
+  it("filters todos", async () => {
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Test Todo 1")).toBeInTheDocument();
+      expect(screen.getByText("Test Todo 2")).toBeInTheDocument();
+    });
+
+    const activeFilterButton = screen.getByRole("button", { name: "Active" });
+    await userEvent.click(activeFilterButton);
+
+    expect(screen.getByText("Test Todo 1")).toBeInTheDocument();
+    expect(screen.queryByText("Test Todo 2")).not.toBeInTheDocument();
+  });
 
   it("toggles todo completion", async () => {
     render(<App />);
@@ -77,19 +92,4 @@ describe("App", () => {
 
     expect(api.deleteTodo).toHaveBeenCalledWith(1);
   });
-
-  //   it("filters todos", async () => {
-  //     render(<App />);
-
-  //     await waitFor(() => {
-  //       expect(screen.getByText("Test Todo 1")).toBeInTheDocument();
-  //       expect(screen.getByText("Test Todo 2")).toBeInTheDocument();
-  //     });
-
-  //     const activeFilterButton = screen.getByRole("button", { name: "Active" });
-  //     await userEvent.click(activeFilterButton);
-
-  //     expect(screen.getByText("Test Todo 1")).toBeInTheDocument();
-  //     expect(screen.queryByText("Test Todo 2")).not.toBeInTheDocument();
-  //   });
 });
