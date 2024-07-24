@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface TodoFormProps {
   onAdd: (title: string, dueDate: string) => void;

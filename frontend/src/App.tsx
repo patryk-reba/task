@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Todo, SortOrder, FilterType } from "./types";
-import { fetchTodos, addTodo, toggleTodo, deleteTodo, editTodo } from "./api";
-import TodoItem from "./TodoItem";
-import TodoForm from "./TodoForm";
-import TodoFilter from "./TodoFilter";
+import {
+  fetchTodos,
+  addTodo,
+  toggleTodo,
+  deleteTodo,
+  editTodo,
+} from "./services/api";
+import TodoItem from "./components/TodoItem/TodoItem";
+
+import TodoFilter from "./components/TodoFilter/TodoFilter";
 
 import {
   saveTodosToLocalStorage,
   getTodosFromLocalStorage,
-} from "./localStorageUtils";
-import ErrorMessage from "./ErrorMessage";
+} from "./utils/localStorageUtils";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import TodoForm from "./components/TodoForm/TodoForm";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
