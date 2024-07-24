@@ -7,10 +7,6 @@ import {
   deleteTodo,
   editTodo,
 } from "../services/api";
-import {
-  saveTodosToLocalStorage,
-  getTodosFromLocalStorage,
-} from "../utils/localStorageUtils";
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -24,13 +20,8 @@ export const useTodos = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const storedTodos = getTodosFromLocalStorage();
-        if (storedTodos.length > 0) {
-          setTodos(storedTodos);
-        } else {
-          const fetchedTodos = await fetchTodos();
-          setTodos(fetchedTodos);
-        }
+        const fetchedTodos = await fetchTodos();
+        setTodos(fetchedTodos);
       } catch (error) {
         setError("Failed to fetch todos. Please try again later.");
       } finally {
@@ -39,10 +30,6 @@ export const useTodos = () => {
     };
     loadTodos();
   }, []);
-
-  useEffect(() => {
-    saveTodosToLocalStorage(todos);
-  }, [todos]);
 
   const handleAddTodo = async (title: string, dueDate: string) => {
     try {

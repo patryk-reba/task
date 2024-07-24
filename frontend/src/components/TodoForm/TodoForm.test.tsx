@@ -21,7 +21,7 @@ describe("TodoForm", () => {
 
   const renderWithContext = () => {
     return render(
-      <TodoContext.Provider value={{ handleAddTodo: mockHandleAddTodo } as any}>
+      <TodoContext.Provider value={{ handleAddTodo: mockHandleAddTodo }}>
         <TodoForm />
       </TodoContext.Provider>
     );
