@@ -6,3 +6,5 @@ export interface Todo {
 }
 
 export type SortOrder = "asc" | "desc";
+
+export type FilterType = "all" | "active" | "completed";

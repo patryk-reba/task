@@ -4,11 +4,12 @@ import { fetchTodos, addTodo, toggleTodo, deleteTodo, editTodo } from "./api";
 import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm";
 import TodoFilter from "./TodoFilter";
-import ErrorMessage from "./ErrorMessage";
+
 import {
   saveTodosToLocalStorage,
   getTodosFromLocalStorage,
 } from "./localStorageUtils";
+import ErrorMessage from "./ErrorMessage";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -120,17 +121,19 @@ function App() {
           </h1>
           {error && <ErrorMessage message={error} />}
           <TodoForm onAdd={handleAddTodo} />
-          <TodoFilter currentFilter={filter} onFilterChange={setFilter} />
-          <button
-            onClick={sortTodos}
-            className="mb-6 w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-md transition duration-300"
-            aria-label={`Sort by Due Date (${
-              sortOrder === "asc" ? "Ascending" : "Descending"
-            })`}
-          >
-            Sort by Due Date ({sortOrder === "asc" ? "Ascending" : "Descending"}
-            )
-          </button>
+          <div className="md:flex gap-2">
+            <TodoFilter currentFilter={filter} onFilterChange={setFilter} />
+            <button
+              onClick={sortTodos}
+              className="mb-6 w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+              aria-label={`Sort by Due Date (${
+                sortOrder === "asc" ? "Ascending" : "Descending"
+              })`}
+            >
+              Sort by Due Date (
+              {sortOrder === "asc" ? "Ascending" : "Descending"})
+            </button>
+          </div>
           {isLoading ? (
             <div className="text-center py-4" aria-live="polite">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500 mx-auto"></div>
