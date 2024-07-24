@@ -58,7 +58,7 @@ The project is organized into two main directories:
 
    ```
    git clone https://github.com/patryk-reba/task.git
-   cd todo-list-app
+   cd task
    ```
 
 2. Set up and start the backend:
